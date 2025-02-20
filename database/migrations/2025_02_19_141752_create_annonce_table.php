@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('phone');
             $table->string('type');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('users_id');
             $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
