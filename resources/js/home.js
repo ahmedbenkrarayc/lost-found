@@ -1,8 +1,11 @@
 let categories = []
 let annonces = []
+let filtered = []
+let selectedCat = 'All'
 
 const categoryContainer = document.getElementById('categories')
 const annonceContainer = document.getElementById('annonces')
+const keyword = document.getElementById('keyword')
 
 const fetchCategories = async () => {
     const response = await fetch('/category/getAll')
@@ -24,6 +27,8 @@ document.addEventListener('click', (e) => {
             item.classList.remove('selectedcat')
         })
         e.target.classList.add('selectedcat')
+        selectedCat = e.target.textContent
+        filter()
     }
 })
 
@@ -31,10 +36,12 @@ const fetchAnnonces = async () => {
     const response = await fetch('/annonce/getAll')
     const data = await response.json()
     annonces = data
+    filtered = [...annonces]
 }
 
 const displayAnnonces = () => {
-    annonces.forEach((item) => {
+    annonceContainer.innerHTML = ''
+    filtered.forEach((item) => {
         annonceContainer.innerHTML += `
             <a class="block" href="/annonce/${item.id}">
                 <img class="block object-cover w-full md:h-[400px]" src="${'/storage/'+item.cover}" alt="cover image">
@@ -46,8 +53,21 @@ const displayAnnonces = () => {
     })
 }
 
+const filter = () => {
+    filtered = [...annonces]
+    filtered = filtered.filter(item => item.title.toLowerCase().includes(keyword.value.toLowerCase()) || item.place.toLowerCase().includes(keyword.value.toLowerCase()) || item.description.toLowerCase().includes(keyword.value.toLowerCase()))
+    if(selectedCat != 'All')
+        filtered = filtered.filter(item => item.category.name.toLowerCase().includes(selectedCat.toLowerCase()))
+    displayAnnonces()
+}
+
+
 (async () => {
     await Promise.all([fetchCategories(), fetchAnnonces()])
     displayCategories()
     displayAnnonces()
 })()
+
+keyword.addEventListener('input', () => {
+    filter()
+})
