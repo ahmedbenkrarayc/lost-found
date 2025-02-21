@@ -9,15 +9,7 @@
 <body class="px-20 overflow-x-hidden">
     <main class="font-Quicksand">
         <header class="text-[#1c1d20] relative">
-            <nav class="flex justify-between py-11 font-Quicksand mb-16">
-                <h1 class="sm:text-[19px] md:text-[18px] lg:text-[20px] font-[600]">Lost&Found</h1>
-                <ul class="flex gap-x-6 sm:text-[19px] md:text-[16px] lg:text-[16px] font-[600]">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Statistics</a></li>
-                    <li><a href="">Login</a></li>
-                    <li><a href="">Register</a></li>
-                </ul>
-            </nav>
+            @include('layouts.nav')
     
             <img class="sm:hidden md:block w-[70rem] z-[-1] top-[300px] right-[-40%] bottom-0 left-auto absolute opacity-[.83]" src="https://ahmedbenkrara.netlify.app/assets/highlight-ElSyRTm5.png" alt="highlight">
         </header>
@@ -31,8 +23,12 @@
         </section>
         <section class="mt-10">
             <h1 class="text-xl font-[600] mt-1 mb-4">Comments</h1>
-            <textarea placeholder="Write a comment here" class="w-full bg-white text-[#1c1d20] border border-[#c0c0c0] mb-4 h-[150px] rounded-md sm:px-8 sm:py-[18px] md:px-9 md:py-[20px] lg:px-11 lg:py-[25px] font-Quicksand sm:text-[15px] md:text-[16px] font-medium resize-none"></textarea>
-            <button class="bg-[#1c1d20] text-white font-medium px-6 py-2 rounded-md ml-auto block">Comment</button>
+            <form action="/annonce/comment" method="post">
+                @csrf
+                <input type="hidden" name="annonce_id" value="{{ $annonce->id }}">
+                <textarea name="comment" placeholder="Write a comment here" class="w-full bg-white text-[#1c1d20] border border-[#c0c0c0] mb-4 h-[150px] rounded-md sm:px-8 sm:py-[18px] md:px-9 md:py-[20px] lg:px-11 lg:py-[25px] font-Quicksand sm:text-[15px] md:text-[16px] font-medium resize-none"></textarea>
+                <button type="submit" class="bg-[#1c1d20] text-white font-medium px-6 py-2 rounded-md ml-auto block">Comment</button>
+            </form>
 
             <div class="comments mt-10">
                 @foreach($annonce->comments as $comment)
