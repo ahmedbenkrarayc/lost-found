@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>{{ $annonce->title }}</title>
     @vite(['resources/css/app.css'])
 </head>
 <body class="px-20 overflow-x-hidden">
@@ -22,12 +22,12 @@
             <img class="sm:hidden md:block w-[70rem] z-[-1] top-[300px] right-[-40%] bottom-0 left-auto absolute opacity-[.83]" src="https://ahmedbenkrara.netlify.app/assets/highlight-ElSyRTm5.png" alt="highlight">
         </header>
         <section class="mt-11">
-            <img class="block object-cover w-full md:h-[500px]" src="https://ahmedbenkrara.netlify.app/assets/realestate-CSPdVNba.png" alt="cover image">
-            <span class="block mt-6 text-white text-xs bg-[#1c1d20] font-semibold px-4 py-2 w-fit rounded-full">Found</span>
-            <h1 class="text-2xl font-[600] mt-1">Lorem Ipsum is simply dummy</h1>
+            <img class="block object-cover w-full md:h-[500px]" src="{{ asset('storage/'.$annonce->cover) }}" alt="cover image">
+            <span class="block mt-6 text-white text-xs bg-[#1c1d20] font-semibold px-4 py-2 w-fit rounded-full">{{ $annonce->type }}</span>
+            <h1 class="text-2xl font-[600] mt-1">{{ $annonce->title }}</h1>
         </section>
         <section class="mt-6">
-            <p class="text-lg text-[#1c1d20]">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+            <p class="text-lg text-[#1c1d20]">{{ $annonce->description }}</p>
         </section>
         <section class="mt-10">
             <h1 class="text-xl font-[600] mt-1 mb-4">Comments</h1>
@@ -35,27 +35,15 @@
             <button class="bg-[#1c1d20] text-white font-medium px-6 py-2 rounded-md ml-auto block">Comment</button>
 
             <div class="comments mt-10">
+                @foreach($annonce->comments as $comment)
                 <div class="mb-6">
                     <div class="flex items-center gap-x-2 font-medium">
                         <img class="w-10 h-10" src="{{ asset('assets/images/avatar.svg') }}" alt=""> 
-                        <h1>Ahmed Benkrara</h1>
+                        <h1>{{ $comment->user->fname.' '.$comment->user->lname }}</h1>
                     </div>
-                    <p class="pl-12">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
+                    <p class="pl-12">{{ $comment->comment }}</p>
                 </div>
-                <div class="mb-6">
-                    <div class="flex items-center gap-x-2 font-medium">
-                        <img class="w-10 h-10" src="{{ asset('assets/images/avatar.svg') }}" alt=""> 
-                        <h1>Ahmed Benkrara</h1>
-                    </div>
-                    <p class="pl-12">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
-                </div>
-                <div class="mb-6">
-                    <div class="flex items-center gap-x-2 font-medium">
-                        <img class="w-10 h-10" src="{{ asset('assets/images/avatar.svg') }}" alt=""> 
-                        <h1>Ahmed Benkrara</h1>
-                    </div>
-                    <p class="pl-12">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
-                </div>
+                @endforeach
             </div>
         </section>
     </main>
