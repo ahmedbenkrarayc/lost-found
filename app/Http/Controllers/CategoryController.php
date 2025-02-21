@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use APp\Models\Category;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function index(){
+    public function getAll(){
         $categories = Category::all();
         return response()->json($categories);
     }
