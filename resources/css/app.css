@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.category{
+    @apply cursor-pointer bg-white text-[#1c1d20] hover:bg-[#1c1d20] hover:text-white border border-[#c0c0c0] w-fit h-fit rounded-full sm:px-8 sm:py-[18px] md:px-9 md:py-[20px] lg:px-11 lg:py-[25px] font-Quicksand sm:text-[15px] md:text-[16px] font-medium;
+    transition: background .3s ease-in-out, color .3s ease-in-out;
+}
+
+.selectedcat{
+    color: white !important;
+    background: #1c1d20 !important;
+}
