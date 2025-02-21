@@ -55,27 +55,10 @@ class AnnonceController extends Controller
         return view('details', compact('annonce'));
     }
 
-    public function update(Request $request, Annonce $annonce)
-    {
-        $validated = $request->validate([
-            'title' => 'sometimes|required|string|max:255',
-            'description' => 'sometimes|required|string',
-            'cover' => 'nullable|string',
-            'date' => 'sometimes|required|date',
-            'place' => 'sometimes|required|string',
-            'phone' => 'sometimes|required|string',
-            'type' => 'sometimes|required|string',
-            'category_id' => 'sometimes|required|exists:categories,id',
-            'users_id' => 'sometimes|required|exists:users,id',
-        ]);
+    public function statistics(){
+        $total = Annonce::count();
+        $top10 = Annonce::withCount('comments')->orderByDesc('comments_count')->take(10)->get();
 
-        $annonce->update($validated);
-        return response()->json($annonce);
-    }
-
-    public function destroy(Annonce $annonce)
-    {
-        $annonce->delete();
-        return response()->json(['message' => 'Annonce deleted successfully']);
+        return view('statistics', compact('total', 'top10'));
     }
 }
