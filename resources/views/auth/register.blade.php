@@ -4,9 +4,15 @@
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-label for="fname" :value="__('Fname')"/>
+            <x-text-input id="fname" class="block mt-1 w-full" type="text" name="fname" :value="old('fname')" required autofocus/>
+            <x-input-error :messages="$errors->get('fname')" class="mt-2" />
+        </div>
+
+        <div>
+            <x-input-label for="lname" :value="__('Lname')"/>
+            <x-text-input id="lname" class="block mt-1 w-full" type="text" name="lname" :value="old('lname')" required autofocus/>
+            <x-input-error :messages="$errors->get('lname')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
